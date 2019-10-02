@@ -1,0 +1,8 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "semi": ["off"],
+    "quotes": ["off"],
+    "no-param-reassign": ["error", {"props": false}]
+  }
+}
