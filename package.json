@@ -1,0 +1,30 @@
+{
+  "name": "peanuts-comic-api",
+  "version": "1.0.0",
+  "description": "API to serve up Peanuts comics and handle user subscription signup",
+  "main": "serverless.yml",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icj217/peanuts-comic-api.git"
+  },
+  "author": "Craig Burdulis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icj217/peanuts-comic-api/issues"
+  },
+  "homepage": "https://github.com/icj217/peanuts-comic-api#readme",
+  "devDependencies": {
+    "serverless-domain-manager": "^3.3.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.540.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "express": "^4.17.1",
+    "serverless-bundle": "^1.2.5",
+    "serverless-http": "^2.3.0",
+    "serverless-offline": "^5.11.0"
+  }
+}

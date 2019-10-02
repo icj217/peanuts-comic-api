@@ -1,0 +1,47 @@
+service: peanuts-comic-api
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-east-1
+
+plugins:
+  - serverless-domain-manager
+  - serverless-bundle
+  - serverless-offline
+
+custom:
+  customDomain:
+    domainName: api.peanuts.today
+    certificateName: '*.peanuts.today'
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+functions:
+  api:
+    handler: src/api.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
