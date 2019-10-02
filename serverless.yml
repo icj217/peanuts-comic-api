@@ -1,23 +1,32 @@
 service: peanuts-comic-api
 
-provider:
-  name: aws
-  runtime: nodejs10.x
-  region: us-east-1
-
 plugins:
   - serverless-domain-manager
   - serverless-bundle
   - serverless-offline
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   customDomain:
     domainName: api.peanuts.today
     certificateName: '*.peanuts.today'
-    basePath: ''
-    stage: ${self:provider.stage}
+    basePath: ${self:custom.stage}
+    stage: ${self:custom.stage}
     createRoute53Record: true
+  bundle:
+    sourcemaps: true
+    caching: true
+    stats: false
+    linting: true
 
+package:
+  excludeDevDependencies: true
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-east-1
+  stage: staging # default
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:

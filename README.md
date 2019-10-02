@@ -1,2 +1,5 @@
 # peanuts-comic-api
-API to serve up Peanuts comics and handle user subscription signup
+
+Node.js Express API to serve up Peanuts comics and handle user subscription sign-up
+
+Deployed using the Serverless Framework
