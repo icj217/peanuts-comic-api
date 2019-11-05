@@ -5,6 +5,7 @@ const routes = new Router()
 const dynamodb = new DynamoDB.DocumentClient()
 
 routes.get('/today', async (req, res) => {
+  // TODO: Add support for user providing their timezone so user experience is more straightforward?
   // Calculate current date in UTC
   const displayDate = new Date().toISOString().split('T')[0]
   // Query DynamoDB GSI for today's comic
