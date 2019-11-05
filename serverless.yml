@@ -33,9 +33,14 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - dynamodb:PutItem
+      Resource:
+        Fn::GetAtt: [ subscribersTable, Arn ]
+    - Effect: Allow
+      Action:
         - dynamodb:GetItem
         - dynamodb:Query
-      Resource: 
+      Resource:
         Fn::Join:
           - ""
           - - "arn:aws:dynamodb:"
@@ -63,3 +68,18 @@ functions:
       STAGE: ${self:custom.stage}
       peanutsDDBTable: ${self:custom.existingResources.peanutsDynamoDBTable}
       peanutsDDBTableDateGSI: ${self:custom.existingResources.peanutsDynamoDBTableDateGSI}
+      peanutsSubscribersDDBTable: ${self:resources.Resources.subscribersTable.Properties.TableName}
+
+resources:
+  Resources:
+    subscribersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: peanuts-comic-subscribers
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
